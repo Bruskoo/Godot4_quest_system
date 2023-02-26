@@ -1,10 +1,17 @@
 extends Node
 
-signal TEXT_EDIT_MOUSE_ENTERED
-signal TEXT_EDIT_MOUSE_EXITED
+signal NODE_CREATE_REQUEST
+signal UPDATE_NODE_CONNCETIONS
+signal NODE_CLOSE_REQUEST
 
-func text_edit_mouse_entered():
-	emit_signal("TEXT_EDIT_MOUSE_ENTERED")
 
-func text_edit_mouse_exited():
-	emit_signal("TEXT_EDIT_MOUSE_EXITED")
+func node_create_request(node_type):
+	emit_signal("NODE_CREATE_REQUEST", node_type)
+
+
+func update_node_connections():
+	emit_signal("UPDATE_NODE_CONNCETIONS")
+
+
+func node_close_request(node):
+	emit_signal("NODE_CLOSE_REQUEST", node)

@@ -1,6 +1,5 @@
 extends GraphEdit
 
-#@onready var graph_edit = $GraphEdit
 var service_globals = GlobalServiceVariables
 var mouse_pressed = false
 
@@ -14,25 +13,14 @@ func _input(event):
 
 
 func _ready():
-	service_globals.connect("TEXT_EDIT_MOUSE_ENTERED", _on_text_edit_mouse_entered)
-	service_globals.connect("TEXT_EDIT_MOUSE_EXITED", _on_text_edit_mouse_exited)
+	service_globals.connect("NODE_CLOSE_REQUEST", _on_node_close_request)
+	service_globals.connect("NODE_CREATE_REQUEST", _on_node_create_request)
 
 
 func spawn_node_on_cursor(node):
 	var localposition = get_local_mouse_position()
 	var scroll_ofset = get_scroll_ofs()
 	node.position_offset = (scroll_ofset + localposition) / Vector2(get_zoom(), get_zoom())
-
-
-func _on_text_edit_mouse_entered():
-	var current_zoom = zoom
-	zoom_max = current_zoom
-	zoom_min = current_zoom
-
-
-func _on_text_edit_mouse_exited():
-	zoom_max = 2.074
-	zoom_min = 0.233
 
 
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
@@ -43,10 +31,28 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 	disconnect_node(from_node, from_port, to_node, to_port)
 
 
-func _on_gui_input(event):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and mouse_pressed == true:
-		var main_node = load("res://Nodes/MainNode.tscn")
-		main_node = main_node.instantiate()
-		add_child(main_node)
-		spawn_node_on_cursor(main_node)
-		mouse_pressed = false
+func _on_node_create_request(node_type):
+	match node_type:
+		"text_node":
+			var main_node = load("res://Nodes/TextNode.tscn")
+			main_node = main_node.instantiate()
+			add_child(main_node)
+			spawn_node_on_cursor(main_node)
+		"option_node":
+			var option_node = load("res://Nodes/OptionNode.tscn")
+			option_node = option_node.instantiate()
+			add_child(option_node)
+			spawn_node_on_cursor(option_node)
+
+
+func _on_node_close_request(node):
+	var node_connections = get_connection_list()
+	var instance_name = node.get_name()
+	for n in node_connections:	
+		print(n)
+		if instance_name == n["from"]:
+#			print("disconecting ", instance_name, "from ", n["from"])
+			disconnect_node(instance_name, 0, n["to"], 0)
+		if instance_name == n["to"]:
+#			print("disconecting ", n["to"], "from ", instance_name)
+			disconnect_node(n["from"], 0, instance_name, 0)
