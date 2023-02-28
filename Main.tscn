@@ -46,7 +46,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Clear all"
 
+[node name="Settings" type="Button" parent="GraphEdit/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Preferences"
+
 [connection signal="connection_request" from="GraphEdit" to="GraphEdit" method="_on_graph_edit_connection_request"]
 [connection signal="disconnection_request" from="GraphEdit" to="GraphEdit" method="_on_graph_edit_disconnection_request"]
 [connection signal="gui_input" from="GraphEdit" to="." method="_on_graph_edit_gui_input"]
 [connection signal="pressed" from="GraphEdit/MarginContainer/HBoxContainer/VBoxContainer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="GraphEdit/MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

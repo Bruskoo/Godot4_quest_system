@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpveoqbg2ktux"]
+
+[ext_resource type="Script" path="res://Scripts/SettingsWindow.gd" id="1_uygjh"]
+
+[node name="SettingsWindow" type="Window"]
+title = "Preferences"
+position = Vector2i(8, 32)
+size = Vector2i(400, 200)
+mouse_passthrough = true
+min_size = Vector2i(400, 200)
+max_size = Vector2i(600, 900)
+script = ExtResource("1_uygjh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "save path"
+
+[node name="SavePathLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+structured_text_bidi_override = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Defaults" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Defaults"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveSettings" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Save"
+alignment = 2
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Defaults" to="." method="_on_defaults_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SaveSettings" to="." method="_on_save_settings_pressed"]
