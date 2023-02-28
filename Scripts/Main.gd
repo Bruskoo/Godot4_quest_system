@@ -1,6 +1,8 @@
 extends Control
 
 
+@onready var graph_edit = $GraphEdit
+
 func _ready():
 	pass
 
@@ -11,3 +13,9 @@ func _on_graph_edit_gui_input(_event):
 		node_create_popup = node_create_popup.instantiate()
 		add_child(node_create_popup)
 		node_create_popup.set_position(get_local_mouse_position())
+
+
+func _on_clear_pressed():
+	graph_edit.clear_connections()
+	for node in graph_edit.get_tree().get_nodes_in_group("graph_nodes"):
+		node.queue_free()

@@ -37,11 +37,13 @@ func _on_node_create_request(node_type):
 			var main_node = load("res://Nodes/TextNode.tscn")
 			main_node = main_node.instantiate()
 			add_child(main_node)
+			main_node.add_to_group('graph_nodes')
 			spawn_node_on_cursor(main_node)
 		"option_node":
 			var option_node = load("res://Nodes/OptionNode.tscn")
 			option_node = option_node.instantiate()
 			add_child(option_node)
+			option_node.add_to_group('graph_nodes')
 			spawn_node_on_cursor(option_node)
 
 
