@@ -1,25 +1,40 @@
-[gd_scene load_steps=8 format=3 uid="uid://43sp2w1o1dk1"]
+[gd_scene load_steps=12 format=3 uid="uid://43sp2w1o1dk1"]
 
 [ext_resource type="Texture2D" uid="uid://bgulf4575fvfh" path="res://Assets/port.png" id="1_d7hap"]
 [ext_resource type="Script" path="res://Scripts/TextNode.gd" id="1_ewur4"]
+[ext_resource type="Script" path="res://Scripts/ColorButton.gd" id="3_ytidu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74dev"]
 resource_local_to_scene = true
-bg_color = Color(0.2, 0.2, 0.2, 1)
+bg_color = Color(0.188235, 0.188235, 0.188235, 1)
 border_width_top = 30
-border_color = Color(0.392157, 0.392157, 0.392157, 1)
+border_color = Color(0.247059, 0.247059, 0.247059, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12w23"]
-bg_color = Color(0.0980392, 0.32549, 0.203922, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12s2a"]
-bg_color = Color(0.305882, 0.160784, 0.541176, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iewxj"]
-bg_color = Color(0.054902, 0.258824, 0.27451, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f2d3"]
+resource_local_to_scene = true
+bg_color = Color(0.188235, 0.188235, 0.188235, 1)
+border_width_top = 30
+border_color = Color(0.247059, 0.247059, 0.247059, 1)
+shadow_color = Color(1, 0.482353, 0, 1)
+shadow_size = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg5wr"]
-bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+bg_color = Color(0.188235, 0.188235, 0.188235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg4ok"]
+bg_color = Color(0.0745098, 0.415686, 0.501961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62cn0"]
+bg_color = Color(0.501961, 0.0980392, 0.239216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vo84"]
+bg_color = Color(0.0509804, 0.501961, 0.341176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdc4q"]
+bg_color = Color(0.501961, 0.239216, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2ycl"]
+bg_color = Color(0.0235294, 0.501961, 0.0666667, 1)
 
 [node name="TextNode" type="GraphNode"]
 offset_right = 400.0
@@ -27,6 +42,7 @@ offset_bottom = 250.0
 theme_override_constants/close_h_offset = -10
 theme_override_icons/port = ExtResource("1_d7hap")
 theme_override_styles/frame = SubResource("StyleBoxFlat_74dev")
+theme_override_styles/selected_frame = SubResource("StyleBoxFlat_5f2d3")
 title = "Text node"
 show_close = true
 slot/0/left_enabled = true
@@ -132,29 +148,43 @@ text = "Expand"
 show_behind_parent = true
 custom_minimum_size = Vector2(30, 20)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_12w23")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yg5wr")
+script = ExtResource("3_ytidu")
 
 [node name="Color2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
 show_behind_parent = true
 custom_minimum_size = Vector2(30, 20)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_12s2a")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pg4ok")
+script = ExtResource("3_ytidu")
 
 [node name="Color3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
 show_behind_parent = true
 custom_minimum_size = Vector2(30, 20)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_iewxj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_62cn0")
+script = ExtResource("3_ytidu")
 
 [node name="Color4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
 show_behind_parent = true
 custom_minimum_size = Vector2(30, 20)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_yg5wr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3vo84")
+script = ExtResource("3_ytidu")
+
+[node name="Color5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+show_behind_parent = true
+custom_minimum_size = Vector2(30, 20)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_gdc4q")
+script = ExtResource("3_ytidu")
+
+[node name="Color6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+show_behind_parent = true
+custom_minimum_size = Vector2(30, 20)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f2ycl")
+script = ExtResource("3_ytidu")
 
 [connection signal="close_request" from="." to="." method="_on_close_request"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer4/Expand" to="." method="_on_expand_toggled"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/Color1" to="." method="_on_color_1_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/Color2" to="." method="_on_color_2_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/Color3" to="." method="_on_color_3_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/Color4" to="." method="_on_color_4_pressed"]
