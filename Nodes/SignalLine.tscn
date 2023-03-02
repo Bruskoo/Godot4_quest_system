@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgp8dlqk6flya"]
+
+[ext_resource type="Texture2D" uid="uid://d0fq2f06u3avu" path="res://Assets/close_button.png" id="1_0o2c6"]
+[ext_resource type="Script" path="res://Scripts/SignalLine.gd" id="1_gy6l1"]
+
+[node name="SignalLine" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gy6l1")
+
+[node name="SignalName" type="Label" parent="."]
+layout_mode = 2
+text = "Signal"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("1_0o2c6")
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

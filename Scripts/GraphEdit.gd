@@ -51,7 +51,7 @@ func _on_node_close_request(node):
 	var node_connections = get_connection_list()
 	var instance_name = node.get_name()
 	for n in node_connections:	
-		print(n)
+#		print(n)
 		if instance_name == n["from"]:
 #			print("disconecting ", instance_name, "from ", n["from"])
 			disconnect_node(instance_name, 0, n["to"], 0)
