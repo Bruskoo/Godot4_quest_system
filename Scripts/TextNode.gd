@@ -2,10 +2,10 @@ extends GraphNode
 
 
 @onready var text_edit = $MarginContainer/VBoxContainer/TextBlock/TextEdit
-@onready var signal_selection_list = $MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock/SignalOption
-@onready var signal_list_block = $MarginContainer/VBoxContainer/SignalListBlock
+@onready var signal_selection_option = $MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock/SignalOption
+@onready var signal_scroll_container = $MarginContainer/VBoxContainer/SignalListBlock/ScrollContainer/VBoxContainer
 @onready var select_node_type = $MarginContainer/VBoxContainer/NodeTypeBlock/NodeTypeOption
-var default_node_size = Vector2(400, 400)
+@onready var signal_list_block = $MarginContainer/VBoxContainer/SignalListBlock
 
 
 func _ready():
@@ -19,9 +19,12 @@ func change_color_request(color):
 
 func _on_expand_toggled(button_pressed):
 	if button_pressed:
+		self.set_size(Vector2(401, 401))
 		text_edit.set_fit_content_height_enabled(true)
 	else:
 		text_edit.set_fit_content_height_enabled(false)
+		# Resize to make shrink graph node container
+		self.set_size(Vector2(400, 400))
 
 
 func _on_close_request():
@@ -32,15 +35,18 @@ func _on_close_request():
 func _on_add_signal_pressed():
 	var signal_line = load("res://Nodes/SignalLine.tscn")
 	signal_line = signal_line.instantiate()
-	signal_list_block.add_child(signal_line)
+	signal_scroll_container.add_child(signal_line)
 	signal_line.add_to_group("signals")
 
 
 func _on_show_signal_tab_toggled(button_pressed):
 	if button_pressed == true:
 		signal_list_block.set_visible(true)
+		self.set_size(Vector2(401, 401))
 	else:
 		signal_list_block.set_visible(false)
+		# Resize to make shrink graph node container
+		self.set_size(Vector2(400, 400))
 
 
 func _on_node_type_option_item_selected(index):
