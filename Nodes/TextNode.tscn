@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://43sp2w1o1dk1"]
+[gd_scene load_steps=13 format=3 uid="uid://43sp2w1o1dk1"]
 
 [ext_resource type="Texture2D" uid="uid://bgulf4575fvfh" path="res://Assets/port.png" id="1_d7hap"]
 [ext_resource type="Script" path="res://Scripts/TextNode.gd" id="1_ewur4"]
+[ext_resource type="Texture2D" uid="uid://d0fq2f06u3avu" path="res://Assets/close_button.png" id="2_xvdkw"]
 [ext_resource type="Script" path="res://Scripts/ColorButton.gd" id="3_ytidu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74dev"]
@@ -41,8 +42,10 @@ custom_minimum_size = Vector2(400, 400)
 offset_right = 400.0
 offset_bottom = 400.0
 theme_override_constants/title_h_offset = 10
+theme_override_constants/close_offset = 25
 theme_override_constants/close_h_offset = -10
 theme_override_icons/port = ExtResource("1_d7hap")
+theme_override_icons/close = ExtResource("2_xvdkw")
 theme_override_styles/frame = SubResource("StyleBoxFlat_74dev")
 theme_override_styles/selected_frame = SubResource("StyleBoxFlat_5f2d3")
 show_close = true
@@ -186,6 +189,7 @@ size_flags_horizontal = 0
 text = "Show signal tab"
 
 [node name="SignalListBlock" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="SignalSelectionBlock" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SignalListBlock"]
@@ -194,9 +198,6 @@ layout_mode = 2
 [node name="SignalOption" type="OptionButton" parent="MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock"]
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 1
-popup/item_0/text = "Node"
-popup/item_0/id = 0
 
 [node name="AddSignal" type="Button" parent="MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock"]
 layout_mode = 2

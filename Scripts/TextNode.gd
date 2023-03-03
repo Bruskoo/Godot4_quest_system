@@ -1,15 +1,17 @@
 extends GraphNode
 
-
 @onready var text_edit = $MarginContainer/VBoxContainer/TextBlock/TextEdit
 @onready var signal_selection_option = $MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock/SignalOption
 @onready var signal_scroll_container = $MarginContainer/VBoxContainer/SignalListBlock/ScrollContainer/VBoxContainer
 @onready var select_node_type = $MarginContainer/VBoxContainer/NodeTypeBlock/NodeTypeOption
 @onready var signal_list_block = $MarginContainer/VBoxContainer/SignalListBlock
+@onready var signal_option = $MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock/SignalOption
 
 
 func _ready():
 	self.title = select_node_type.get_item_text(select_node_type.get_selected_id())
+	for sig in GlobalSettings.signal_dict:
+		signal_option.add_item(GlobalSettings.signal_dict[sig]["signal_name"])
 
 
 func change_color_request(color):
@@ -33,10 +35,13 @@ func _on_close_request():
 
 
 func _on_add_signal_pressed():
+	var signal_index = signal_selection_option.get_selected_id()
+	GlobalSettings.signal_dict[signal_index]
 	var signal_line = load("res://Nodes/SignalLine.tscn")
 	signal_line = signal_line.instantiate()
 	signal_scroll_container.add_child(signal_line)
 	signal_line.add_to_group("signals")
+	signal_line.set_signal_name(GlobalSettings.signal_dict[signal_index]["signal_name"])
 
 
 func _on_show_signal_tab_toggled(button_pressed):
