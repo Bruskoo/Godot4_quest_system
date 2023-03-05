@@ -20,6 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 snap_distance = 10
+connection_lines_curvature = 0.0
 show_zoom_label = true
 minimap_size = Vector2(160, 106.667)
 script = ExtResource("1_v6n57")

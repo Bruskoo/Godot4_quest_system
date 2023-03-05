@@ -10,8 +10,7 @@ extends GraphNode
 
 func _ready():
 	self.title = select_node_type.get_item_text(select_node_type.get_selected_id())
-	for sig in GlobalSettings.signal_dict:
-		signal_option.add_item(GlobalSettings.signal_dict[sig]["signal_name"])
+	update_node()
 
 
 func change_color_request(color):
@@ -42,6 +41,7 @@ func _on_add_signal_pressed():
 	signal_scroll_container.add_child(signal_line)
 	signal_line.add_to_group("signals")
 	signal_line.set_signal_name(GlobalSettings.signal_dict[signal_index]["signal_name"])
+	update_node()
 
 
 func _on_show_signal_tab_toggled(button_pressed):
@@ -56,3 +56,14 @@ func _on_show_signal_tab_toggled(button_pressed):
 
 func _on_node_type_option_item_selected(index):
 	self.title = select_node_type.get_item_text(index)
+
+
+func _on_signal_option_pressed():
+	update_node()
+
+
+func update_node():
+	signal_selection_option.clear()
+	for sig in GlobalSettings.signal_dict:
+		signal_option.add_item(GlobalSettings.signal_dict[sig]["signal_name"])
+	

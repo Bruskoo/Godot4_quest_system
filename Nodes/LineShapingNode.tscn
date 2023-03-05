@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba2injfdwll7q"]
+
+[ext_resource type="Texture2D" uid="uid://bgulf4575fvfh" path="res://Assets/port.png" id="1_tmpf8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ks0du"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o8war"]
+
+[node name="LineConnector" type="GraphNode"]
+anchors_preset = -1
+theme_override_icons/port = ExtResource("1_tmpf8")
+theme_override_styles/frame = SubResource("StyleBoxTexture_ks0du")
+theme_override_styles/selected_frame = SubResource("StyleBoxTexture_o8war")
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3

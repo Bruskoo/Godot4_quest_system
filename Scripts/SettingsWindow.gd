@@ -22,7 +22,7 @@ func update_settings():
 	for index in GlobalSettings.signal_dict:
 		var signal_name = GlobalSettings.signal_dict[index]["signal_name"]
 		var signal_type = GlobalSettings.signal_dict[index]["signal_type"]
-		var create_signal_line = load("res://Nodes/CreateSignalLine.tscn")
+		var create_signal_line = load("res://Windows/CreateSignalLine.tscn")
 		create_signal_line = create_signal_line.instantiate()
 		scroll_container.add_child(create_signal_line)
 		create_signal_line.add_to_group("signals")
@@ -48,7 +48,7 @@ func _on_defaults_pressed():
 
 
 func _on_add_signal_pressed():
-	var create_signal_line = load("res://Nodes/CreateSignalLine.tscn")
+	var create_signal_line = load("res://Windows/CreateSignalLine.tscn")
 	create_signal_line = create_signal_line.instantiate()
 	scroll_container.add_child(create_signal_line)
 	create_signal_line.add_to_group("signals")

@@ -1,6 +1,12 @@
 extends GraphEdit
 
 var mouse_pressed = false
+var init_mouse_position
+var selected_node_dict = {}
+
+
+func _ready():
+	GlobalServiceVariables.connect("NODE_CLOSE_REQUEST", _on_node_close_request)
 
 
 func _input(event):
@@ -11,8 +17,26 @@ func _input(event):
 			mouse_pressed = false
 
 
-func _ready():
-	GlobalServiceVariables.connect("NODE_CLOSE_REQUEST", _on_node_close_request)
+func _process(delta):
+	if Input.is_action_just_pressed("g_key"):
+		selected_node_dict = {}
+		init_mouse_position = get_local_mouse_position()
+		var index = 0
+		for node in get_tree().get_nodes_in_group("graph_nodes"):
+			if node.selected:
+				selected_node_dict[index] = {"node": node, "position": node.position_offset}
+				index += 1
+
+	if Input.is_action_pressed("g_key"):
+		for index in selected_node_dict:
+			for node in self.get_children():
+				if selected_node_dict[index]["node"] == node:
+					var localposition = get_local_mouse_position()
+					if init_mouse_position != localposition:
+						var x = int((selected_node_dict[index]["position"][0] + localposition[0] - init_mouse_position[0]) / 10) * 10
+						var y = int((selected_node_dict[index]["position"][1] + localposition[1] - init_mouse_position[1]) / 10) * 10
+						node.position_offset = Vector2(x, y)
+#						node.position_offset = (Vector2(node_dict[index]["position"]) + (localposition - init_mouse_position))
 
 
 func spawn_node_on_cursor(node):
@@ -42,6 +66,13 @@ func _on_node_close_request(node):
 
 
 func _on_gui_input(event):
+	if Input.is_action_just_pressed("ui_accept"):
+		var line_connector = load("res://Nodes/LineShapingNode.tscn")
+		line_connector = line_connector.instantiate()
+		add_child(line_connector)
+		line_connector.add_to_group('graph_nodes')
+		spawn_node_on_cursor(line_connector)
+
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and mouse_pressed == true:
 		var main_node = load("res://Nodes/TextNode.tscn")
 		main_node = main_node.instantiate()
