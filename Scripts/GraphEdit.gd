@@ -41,7 +41,7 @@ func _on_gui_input(event):
 						disconnect_node(instance_name, 0, n["to"], 0)
 					if instance_name == n["to"]:
 						disconnect_node(n["from"], 0, instance_name, 0)
-					node.queue_free()
+				node.queue_free()
 
 
 func _process(delta):
