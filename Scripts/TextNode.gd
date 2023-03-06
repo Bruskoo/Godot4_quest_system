@@ -36,13 +36,14 @@ func _on_close_request():
 
 func _on_add_signal_pressed():
 	var signal_index = signal_selection_option.get_selected_id()
-	GlobalSettings.signal_dict[signal_index]
-	var signal_line = load("res://Nodes/SignalLine.tscn")
-	signal_line = signal_line.instantiate()
-	signal_scroll_container.add_child(signal_line)
-	signal_line.add_to_group("signals")
-	signal_line.set_signal_name(GlobalSettings.signal_dict[signal_index]["signal_name"])
-	update_node()
+	if signal_index != -1:
+		GlobalSettings.signal_dict[signal_index]
+		var signal_line = load("res://Nodes/SignalLine.tscn")
+		signal_line = signal_line.instantiate()
+		signal_scroll_container.add_child(signal_line)
+		signal_line.add_to_group("signals")
+		signal_line.set_signal_name(GlobalSettings.signal_dict[signal_index]["signal_name"])
+		update_node()
 
 
 func _on_show_signal_tab_toggled(button_pressed):
