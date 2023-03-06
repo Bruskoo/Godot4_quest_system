@@ -1,6 +1,7 @@
 extends GraphNode
 
 @onready var text_edit = $MarginContainer/VBoxContainer/TextBlock/TextEdit
+@onready var character_option = $MarginContainer/VBoxContainer/CharacterBlock/CharacterOptionButton
 @onready var signal_selection_option = $MarginContainer/VBoxContainer/SignalListBlock/SignalSelectionBlock/SignalOption
 @onready var signal_scroll_container = $MarginContainer/VBoxContainer/SignalListBlock/ScrollContainer/VBoxContainer
 @onready var select_node_type = $MarginContainer/VBoxContainer/NodeTypeBlock/NodeTypeOption
@@ -56,6 +57,20 @@ func _on_show_signal_tab_toggled(button_pressed):
 
 func _on_node_type_option_item_selected(index):
 	self.title = select_node_type.get_item_text(index)
+	
+	match select_node_type.get_item_text(index):
+		"Text node":
+			self.get_theme_stylebox("frame").border_color = Color(0.24, 0.24, 0.25, 1)
+			self.get_theme_stylebox("selected_frame").border_color = Color(0.24, 0.24, 0.25, 1)
+		"Option mode":
+			self.get_theme_stylebox("frame").border_color = Color(0.15, 0.21, 0.50, 1)
+			self.get_theme_stylebox("selected_frame").border_color = Color(0.15, 0.21, 0.50, 1)
+		"Start":
+			self.get_theme_stylebox("frame").border_color = Color(0.12, 0.29, 0.14, 1)
+			self.get_theme_stylebox("selected_frame").border_color = Color(0.12, 0.29, 0.14, 1)
+		"End":
+			self.get_theme_stylebox("frame").border_color = Color(0.43, 0.12, 0.16, 1)
+			self.get_theme_stylebox("selected_frame").border_color = Color(0.43, 0.12, 0.16, 1)
 
 
 func _on_signal_option_pressed():
@@ -67,3 +82,6 @@ func update_node():
 	for sig in GlobalSettings.signal_dict:
 		signal_option.add_item(GlobalSettings.signal_dict[sig]["signal_name"])
 	
+	character_option.clear()
+	for character_index in GlobalSettings.characters_dict:
+		character_option.add_item(GlobalSettings.characters_dict[character_index]["character_name"])

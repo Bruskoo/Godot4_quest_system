@@ -63,6 +63,31 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="CharacterContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/CharacterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Characters"
+horizontal_alignment = 1
+
+[node name="AddCharacter" type="Button" parent="MarginContainer/VBoxContainer/CharacterContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Add"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CharacterContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CharacterContainer/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -85,5 +110,6 @@ alignment = 2
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SignalContainer/AddSignal" to="." method="_on_add_signal_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CharacterContainer/AddCharacter" to="." method="_on_add_character_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Defaults" to="." method="_on_defaults_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SaveSettings" to="." method="_on_save_settings_pressed"]

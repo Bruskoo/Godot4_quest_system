@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc0rlner6qk5n"]
+
+[ext_resource type="Script" path="res://Scripts/CreateCharacterLine.gd" id="1_fxi53"]
+[ext_resource type="Texture2D" uid="uid://d0fq2f06u3avu" path="res://Assets/close_button.png" id="2_58vyd"]
+
+[node name="CreateCharacterLine" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fxi53")
+
+[node name="CharacterName" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Character name"
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("2_58vyd")
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
