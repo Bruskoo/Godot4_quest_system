@@ -10,12 +10,19 @@ func _ready():
 
 
 func _on_gui_input(event):
-	if Input.is_action_just_pressed("create_text_node"):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			mouse_pressed = true
+		else:
+			mouse_pressed = false
+
+	if Input.is_action_just_pressed("create_text_node") or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and mouse_pressed == true:
 		var main_node = load("res://Nodes/TextNode.tscn")
 		main_node = main_node.instantiate()
 		add_child(main_node)
 		main_node.add_to_group('graph_nodes')
 		spawn_node_on_cursor(main_node)
+		mouse_pressed = false
 	
 	if Input.is_action_just_pressed("create_line_shaping_node"):
 		var line_connector = load("res://Nodes/LineShapingNode.tscn")
